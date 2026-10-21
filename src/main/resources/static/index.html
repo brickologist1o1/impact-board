@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f6f5f1"><title>Impact Board — Suivi d'impact</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<div id="login-screen" class="login-wrap hidden">
+  <div class="login-art"><div class="brand-mark">i.</div><p class="eyebrow light">MESURER POUR AGIR</p><h1>Chaque action<br>compte.</h1><p>Transformez vos efforts en résultats concrets et partagez votre impact avec confiance.</p><div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div></div>
+  <form id="login-form" class="login-card"><div class="brand-mark small">i.</div><p class="eyebrow">BIENVENUE SUR IMPACT BOARD</p><h2>Connectez-vous</h2><p class="muted">Retrouvez le suivi de vos projets sociaux.</p><label>Nom d'utilisateur<input name="username" value="manager" autocomplete="username" required></label><label>Mot de passe<input name="password" type="password" value="impact2026" autocomplete="current-password" required></label><button class="button primary full">Se connecter <span>→</span></button><p id="login-error" class="error"></p><div class="demo-hint">Démo : <b>manager</b> / <b>impact2026</b></div></form>
+</div>
+<div id="app" class="app-shell hidden">
+  <aside class="sidebar"><div class="brand"><span class="brand-mark small">i.</span><span>impact<span class="brand-light">board</span></span></div><div class="workspace-label">ESPACE DE TRAVAIL</div><nav><button class="nav-item active" id="nav-overview"><span class="nav-icon">◫</span>Vue d'ensemble</button><div class="nav-section">MES PROJETS</div><div id="project-nav" class="project-nav"></div><button id="new-project-sidebar" class="nav-item add-nav"><span>＋</span> Nouveau projet</button></nav><div class="sidebar-bottom"><div class="help-card"><div class="help-dot">✳</div><b>Un impact qui se voit.</b><p>Suivez vos avancées, partagez vos résultats.</p></div><button id="logout" class="profile"><span class="avatar">S</span><span class="profile-text"><b id="user-name">Utilisateur</b><small id="user-role">Manager</small></span><span class="logout-icon">↪</span></button></div></aside>
+  <main class="main-content"><header class="topbar"><div class="breadcrumb"><span>Workspace</span><span class="crumb-sep">/</span><b id="crumb-current">Vue d'ensemble</b></div><div class="top-actions"><span class="today" id="today"></span><button id="top-new-project" class="button primary compact">＋ Nouveau projet</button></div></header>
+    <section id="overview-view" class="view"><div class="welcome-row"><div><p class="eyebrow">LUNDI, 19 OCTOBRE 2026</p><h1>Bonjour, <span id="welcome-name">Sara</span> <span class="wave">✳</span></h1><p class="muted">Voici où en sont vos projets à impact.</p></div><button id="export-overview" class="button ghost">↓ <span>Exporter un rapport</span></button></div>
+      <div class="stats-grid"><article class="stat-card"><div class="stat-label">Projets actifs <span class="stat-icon green">◫</span></div><div class="stat-value" id="stat-projects">—</div><div class="stat-foot"><span class="status-dot"></span>En cours de réalisation</div></article><article class="stat-card"><div class="stat-label">Indicateurs suivis <span class="stat-icon blue">⌁</span></div><div class="stat-value" id="stat-kpis">—</div><div class="stat-foot">Sur l'ensemble des projets</div></article><article class="stat-card"><div class="stat-label">Objectif moyen atteint <span class="stat-icon orange">↗</span></div><div class="stat-value"><span id="stat-progress">—</span><small>%</small></div><div class="stat-foot">Progression cumulée des KPI</div></article></div>
+      <div class="section-head"><div><p class="eyebrow">VOTRE PORTEFEUILLE</p><h2>Vos projets</h2></div><button id="new-project" class="button dark">＋ Créer un projet</button></div><div id="projects-grid" class="projects-grid"></div>
+      <div class="bottom-grid"><section class="panel"><div class="panel-head"><div><p class="eyebrow">SUIVI RÉCENT</p><h3>Dernières mises à jour</h3></div><span class="pill neutral">Activité</span></div><div id="recent-list" class="recent-list"></div></section><section class="quote-panel"><div class="quote-symbol">“</div><p>Les données racontent une histoire. À vous de montrer celle du changement.</p><span>IMPACT BOARD</span><div class="quote-decoration">✳</div></section></div>
+    </section>
+    <section id="project-view" class="view hidden"><div class="project-hero"><div><div class="project-kicker"><span class="status-pill" id="project-status">Actif</span><span id="project-period"></span></div><h1 id="project-title">Projet</h1><p id="project-description" class="muted"></p></div><div class="hero-actions"><button id="project-report" class="button ghost">↓ <span>Rapport PDF</span></button><button id="edit-project" class="button ghost manager-only">Modifier</button></div></div>
+      <div class="project-summary"><div><span class="summary-label">INDICATEURS</span><b id="project-kpi-count">0</b></div><div><span class="summary-label">PROGRESSION MOYENNE</span><b id="project-progress">0%</b></div><div><span class="summary-label">PROCHAINE ÉCHÉANCE</span><b id="project-deadline">—</b></div></div>
+      <div class="section-head kpi-section-head"><div><p class="eyebrow">MESUREZ CE QUI COMPTE</p><h2>Indicateurs de performance</h2></div><button id="new-kpi" class="button dark manager-only">＋ Ajouter un indicateur</button></div><div id="kpi-grid" class="kpi-grid"></div>
+    </section>
+  </main>
+</div>
+<div id="modal-root"></div><div id="toast" class="toast"></div><script src="/app.js"></script>
+</body></html>
