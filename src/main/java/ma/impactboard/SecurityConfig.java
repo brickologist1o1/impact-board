@@ -18,7 +18,7 @@ class SecurityConfig {
     @Bean AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception { return config.getAuthenticationManager(); }
     @Bean SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf(csrf -> csrf.disable())
-            .authorizeHttpRequests(auth -> auth.requestMatchers("/api/auth/login", "/", "/index.html", "/styles.css", "/app.js", "/favicon.ico").permitAll().anyRequest().authenticated())
+            .authorizeHttpRequests(auth -> auth.requestMatchers("/api/auth/login", "/api/auth/register", "/", "/index.html", "/styles.css", "/app.js", "/favicon.ico").permitAll().anyRequest().authenticated())
             .exceptionHandling(ex -> ex.authenticationEntryPoint((req,res,error)->res.sendError(401)))
             .logout(logout -> logout.logoutUrl("/api/auth/logout").logoutSuccessHandler((req,res,auth)->res.setStatus(204)))
             .build();

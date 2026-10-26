@@ -26,6 +26,7 @@ Le projet « École pour toutes » et ses KPI de démonstration sont préchargé
 ## Fonctions livrées
 
 - Authentification par session et mots de passe BCrypt.
+- Inscription publique : les nouveaux comptes sont créés avec le rôle Project Manager; les rôles partenaire et administrateur sont attribués par un administrateur.
 - Création, modification et suppression des projets et des KPI.
 - Partage de projet avec des comptes partenaires existants en lecture seule.
 - Saisie périodique et historique horodaté des mesures.
@@ -34,9 +35,11 @@ Le projet « École pour toutes » et ses KPI de démonstration sont préchargé
 - Rapport PDF téléchargeable par projet avec objectifs, progression, séries de mesure et références aux preuves.
 - Administration d’utilisateurs via l’API protégée par le rôle ADMIN.
 
-## Administration des comptes
+## Création et administration des comptes
 
-La création des comptes est réservée à l’administrateur. Connectez-vous comme `admin`, puis utilisez l’API :
+Un visiteur peut créer un compte Project Manager depuis le lien « Créer un compte » sur l’écran de connexion. Le formulaire demande un nom, un identifiant et un mot de passe d’au moins 8 caractères.
+
+Pour créer un compte partenaire ou administrateur, connectez-vous comme `admin` et utilisez l’interface « Comptes utilisateurs » ou l’API :
 
 ```powershell
 $session = New-Object Microsoft.PowerShell.Commands.WebRequestSession

@@ -42,6 +42,7 @@ class Api {
     }
 
     record Login(String username,String password) {}
+    record RegisterInput(String username,String password,String displayName) {}
     record UserInput(String username,String password,String displayName,Role role) {}
     record UserView(Long id,String username,String displayName,String role) {}
     record ProjectInput(String name,String description,LocalDate startDate,LocalDate endDate,ProjectStatus status,List<String> readers) {}
@@ -53,6 +54,14 @@ class Api {
         catch(AuthenticationException ex){ throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,"Identifiants incorrects."); }
         SecurityContext context=SecurityContextHolder.createEmptyContext(); context.setAuthentication(authentication); SecurityContextHolder.setContext(context); contextRepo.saveContext(context,request,response);
         return userView(user(authentication));
+    }
+    @PostMapping("/auth/register") @ResponseStatus(HttpStatus.CREATED) UserView register(@RequestBody RegisterInput input){
+        if(input.username()==null||!input.username().matches("[A-Za-z0-9._-]{3,32}")||input.displayName()==null||input.displayName().isBlank()||input.password()==null||input.password().length()<8)
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Choisissez un identifiant de 3 à 32 caractères, un nom et un mot de passe d’au moins 8 caractères.");
+        String username=input.username().toLowerCase(Locale.ROOT);
+        if(users.findByUsername(username).isPresent())throw new ResponseStatusException(HttpStatus.CONFLICT,"Ce nom d’utilisateur est déjà utilisé.");
+        AppUser created=users.save(new AppUser(username,passwordEncoder.encode(input.password()),input.displayName().trim(),Role.MANAGER));
+        return userView(created);
     }
     @GetMapping("/auth/me") UserView me(Authentication auth){ return userView(user(auth)); }
     @GetMapping("/admin/users") List<UserView> listUsers(Authentication auth){ requireAdmin(user(auth)); return users.findAll().stream().map(this::userView).toList(); }
