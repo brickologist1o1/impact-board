@@ -9,8 +9,11 @@ spring:
     hibernate:
       ddl-auto: update
     open-in-view: false
+    show-sql: true
     properties:
       hibernate:
+        format_sql: true
+        highlight_sql: true
         jdbc:
           time_zone: UTC
   servlet:
